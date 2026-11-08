@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Make me a café menu with an A4 printed version and an Instagram Story version. Include the café name, address and opening hours, a drink menu, a breakfast menu and a dessert menu, with sample prices."
+      }
+    }
+  }
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Menu — Open Design gallery example</title>
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --surface: #ffffff;
+      --fg: #3e2f23;
+      --muted: #6e5b4c;
+      --accent: #8b5a2b;
+      --accent-light: #d8c3a5;
+      --font-display: "Georgia", "Times New Roman", serif;
+      --font-body: "Georgia", "Times New Roman", serif;
+      --text-sm: 13px;
+      --text-base: 15px;
+      --text-xl: 20px;
+      --text-2xl: 28px;
+      --text-3xl: 40px;
+      --leading: 1.5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--font-body); background: var(--bg); color: var(--fg); font-size: var(--text-base); line-height: var(--leading); }
+    body { padding: 24px; }
+
+    /* ---------- A4 print menu (210 × 297 mm) ---------- */
+    .a4-menu {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 40px auto;
+      padding: 22mm 18mm 18mm;
+      background: var(--surface);
+      border: 1px solid var(--accent-light);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      page-break-after: always;
+    }
+    @page { size: 210mm 297mm; margin: 0; }
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .a4-menu { box-shadow: none; border: none; margin: 0; }
+      .instagram-story { display: none; }
+      .sample-note { display: none; }
+    }
+    .header { text-align: center; padding-bottom: 16px; border-bottom: 2px solid var(--accent); margin-bottom: 22px; }
+    .header h1 { font-family: var(--font-display); font-size: var(--text-2xl); color: var(--accent); margin: 0; letter-spacing: 0.04em; }
+    .header .tagline { color: var(--muted); font-size: var(--text-sm); margin-top: 4px; }
+    .sample-note { text-align: center; color: var(--muted); font-size: var(--text-sm); margin-bottom: 14px; font-style: italic; }
+    .sections { display: flex; flex-direction: column; gap: 20px; }
+    .section { margin-bottom: 6px; }
+    .section h2 { font-family: var(--font-display); font-size: var(--text-xl); color: var(--accent); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.12em; border-bottom: 1px solid var(--accent-light); padding-bottom: 4px; }
+    .menu-item { display: grid; grid-template-columns: 1fr auto; gap: 14px 22px; align-items: baseline; margin-bottom: 12px; border-bottom: 1px dotted var(--accent-light); padding-bottom: 8px; }
+    .menu-item .name { font-weight: 600; color: var(--fg); }
+    .menu-item .description { grid-column: 1 / -1; color: var(--muted); font-size: var(--text-sm); }
+    .menu-item .price { font-weight: 700; color: var(--accent); white-space: nowrap; }
+    .footer { text-align: center; margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--accent-light); color: var(--muted); font-size: var(--text-sm); }
+
+    /* ---------- Instagram Story (1080 × 1920 px) ---------- */
+    .instagram-story {
+      width: 1080px;
+      height: 1920px;
+      margin: 0 auto 40px auto;
+      background: var(--surface);
+      border: 1px solid var(--accent-light);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    }
+    .story-label {
+      position: absolute; top: 16px; left: 16px; right: 16px;
+      text-align: center; color: var(--muted); font-size: var(--text-sm); font-style: italic;
+    }
+    .story-badge {
+      position: absolute; top: 70px; left: 56px;
+      background: var(--accent); color: #ffffff; font-weight: 700; font-size: var(--text-xl);
+      padding: 10px 22px; border-radius: 24px; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .story-title {
+      position: absolute; top: 150px; left: 56px; right: 56px;
+      font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 700; color: var(--fg); line-height: 1.05;
+    }
+    .story-special {
+      position: absolute; top: 380px; left: 56px; right: 56px;
+      color: var(--accent); font-weight: 700; font-size: var(--text-xl); text-align: center;
+    }
+    .story-items {
+      position: absolute; top: 480px; left: 56px; right: 56px;
+      color: var(--muted); font-size: var(--text-base); line-height: 1.7;
+    }
+    .story-items p { margin: 6px 0; }
+    .story-cta {
+      position: absolute; bottom: 130px; left: 56px; right: 56px;
+      border: 2px solid var(--accent); border-radius: 16px; padding: 20px; text-align: center;
+    }
+    .story-cta .price { display: block; font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+    .story-cta p { color: var(--fg); font-size: var(--text-base); margin: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- A4 printed café menu (210 × 297 mm) -->
+  <div class="a4-menu">
+    <div class="sample-note">Sample menu — prices and items are illustrative examples, not real café pricing.</div>
+    <header class="header">
+      <h1>Sunrise Café</h1>
+      <div class="tagline">123 Main Street &middot; Open daily 8am &ndash; 4pm &middot; (555) 123-4567</div>
+    </header>
+    <main class="sections">
+      <section class="section">
+        <h2>Breakfast</h2>
+        <div class="menu-item">
+          <span class="name">Classic Pancakes</span>
+          <span class="description">Fluffy buttermilk pancakes with maple syrup and butter.</span>
+          <span class="price">Sample price &mdash; $8.50</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Avocado Toast</span>
+          <span class="description">Sourdough with smashed avocado, chili flakes and lemon.</span>
+          <span class="price">Sample price &mdash; $9.00</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Berry Bowl</span>
+          <span class="description">Greek yogurt with seasonal berries and granola.</span>
+          <span class="price">Sample price &mdash; $10.50</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Lunch</h2>
+        <div class="menu-item">
+          <span class="name">Caesar Salad</span>
+          <span class="description">Romaine, shaved parmesan and croutons with anchovy dressing.</span>
+          <span class="price">Sample price &mdash; $11.00</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Soup of the Day</span>
+          <span class="description">Chef&rsquo;s fresh creation, served with sourdough.</span>
+          <span class="price">Sample price &mdash; $7.50</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Toasted Ham &amp; Cheese</span>
+          <span class="description">Sourdough, mature cheddar and Dijon mustard.</span>
+          <span class="price">Sample price &mdash; $8.75</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Drinks</h2>
+        <div class="menu-item">
+          <span class="name">Espresso</span>
+          <span class="description">Rich single shot.</span>
+          <span class="price">Sample price &mdash; $3.00</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Cappuccino</span>
+          <span class="description">Espresso with steamed milk and foam.</span>
+          <span class="price">Sample price &mdash; $4.25</span>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>Sunrise Café &middot; 123 Main Street &middot; Open daily 8am &ndash; 4pm &middot; (555) 123-4567</p>
+    </footer>
+  </div>
+
+  <!-- Instagram Story canvas (1080 × 1920 px) -->
+  <div class="instagram-story">
+    <div class="story-label">Instagram Story &mdash; 1080 × 1920 px</div>
+    <div class="story-badge">Sunrise Café</div>
+    <div class="story-title">Daily Specials</div>
+    <div class="story-special">20% off all drinks today</div>
+    <div class="story-items">
+      <p>Espresso &mdash; Sample price $3.00</p>
+      <p>Cappuccino &mdash; Sample price $4.25</p>
+      <p>Avocado Toast &mdash; Sample price $9.00</p>
+    </div>
+    <div class="story-cta">
+      <span class="price">20% off</span>
+      <p>Show this screen for the discount</p>
+    </div>
+  </div>
+
+</body>
+</html>
